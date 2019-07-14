@@ -15,20 +15,20 @@ function Answers(props) {
 
   const { answers } = props;
   return (
-    <div className="row">
+    <>
       {answers.map(answer => {
         return (
           <div
-            className={`col-xs-12 ${classes.colAnswer}`}
+            className={classes.colAnswer}
             key={answer}
             data-answer={answer}
             onClick={handleClick}
           >
-            <span>{atob(answer)}</span>
+            {atob(answer)}
           </div>
         );
       })}
-    </div>
+    </>
   );
 }
 

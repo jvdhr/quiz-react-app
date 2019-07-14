@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowForward from "@material-ui/icons/ArrowForward";
+import InfoButton from "@material-ui/icons/InfoOutlined";
 
 import styles from "../styles/NavbarStyles";
 
@@ -29,7 +30,7 @@ function Navbar(props) {
                   props.history.goBack();
                 }}
                 className={classes.button}
-                aria-label="Delete"
+                aria-label="Go Back"
               >
                 <ArrowForward fontSize="inherit" />
               </IconButton>
@@ -41,7 +42,7 @@ function Navbar(props) {
                 props.history.push("/about");
               }}
             >
-              About
+              <InfoButton />
             </Button>
           )}
         </Toolbar>

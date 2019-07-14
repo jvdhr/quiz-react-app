@@ -22,7 +22,7 @@ function About() {
         <div className={classes.paperAbout}>
           <Avatar alt="jay" src={jay} className={classes.bigAvatar} />
           <Typography component="h1" variant="h3">
-            Javad Hosseinzadeh
+            <span className={classes.nameContainer}>Javad Hosseinzadeh</span>
           </Typography>
           <Typography
             className={classes.infoAbout}
@@ -31,14 +31,14 @@ function About() {
             component="h2"
             variant="h5"
           >
-            Web Designer and Developer
+            <span>Web Designer and Developer</span>
           </Typography>
           <Link
             href="https://www.linkedin.com/in/jvdhr/"
             target="_blank"
             variant="h6"
           >
-            {"See My LinkedIn Profile"}
+            <span className={classes.linkedin}>See My LinkedIn Profile</span>
           </Link>
           <div className={classes.footerAbout}>
             <Typography component="p" align="center">
@@ -50,7 +50,7 @@ function About() {
                 Github
               </Link>
               . Feel free to make any pull requests to improve the application.
-              <br /> <em>Made With ❤</em>
+              <br /> <em>Made With </em>❤
             </Typography>
           </div>
         </div>

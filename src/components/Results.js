@@ -1,6 +1,7 @@
 import React from "react";
 
 import styles from "../styles/ResultsStyle";
+import Button from "@material-ui/core/Button";
 
 import PieChart from "react-minimal-pie-chart";
 import { withRouter } from "react-router-dom";
@@ -11,7 +12,7 @@ function Results(props) {
 
   return (
     <>
-      <div className={`col-xs-12 ${classes.pieChartContainer}`} align="center">
+      <div className={classes.pieChartContainer} align="center">
         <PieChart
           data={[
             {
@@ -37,13 +38,14 @@ function Results(props) {
           }}
         />
       </div>
-      <div className={`col-xs-12 ${classes.finishButton}`} align="center">
-        <button
-          className="btn btn-primary"
+      <div className={classes.finishButton} align="center">
+        <Button
+          color="primary"
+          variant="contained"
           onClick={() => props.history.push("/")}
         >
           Finish
-        </button>
+        </Button>
       </div>
     </>
   );

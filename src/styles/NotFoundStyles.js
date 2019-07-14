@@ -18,16 +18,19 @@ const styles = makeStyles(theme => ({
       fontSize: "18rem",
       fontWeight: "900",
       position: "relative",
+      textAlign: "center",
       "@media (max-width: 980px)": {
         fontSize: "10rem"
       }
     },
     "& h2": {
       color: "#2f3640",
-      fontSize: "2rem"
+      fontSize: "2rem",
+      textAlign: "center"
     },
     "& h5": {
       fontSize: "1.3rem",
+      textAlign: "center",
       color: "rgba(47, 54, 64, 1)"
     }
   }

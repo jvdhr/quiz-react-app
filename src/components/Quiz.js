@@ -2,17 +2,17 @@ import React, { Component } from "react";
 
 import Results from "./Results";
 import Navbar from "./Navbar";
-import Answers from "./Answers";
+import Loading from "./Loading";
+import Questions from "./Questions";
+import Error from "./Error";
 
 import { withStyles } from "@material-ui/styles";
 
-import "../styles/loader.css";
 import styles from "../styles/QuizStyles";
 
-import ReactCountdownClock from "react-countdown-clock";
 import axios from "axios";
 
-class Questions extends Component {
+class Quiz extends Component {
   state = {
     counter: 0,
     questions: [],
@@ -26,7 +26,6 @@ class Questions extends Component {
     questionAnswered: false,
     showButton: false,
     isError: false,
-    errorText: "",
     isAnswerCorrect: undefined,
     message: "",
     isDisplayMessage: false
@@ -59,7 +58,7 @@ class Questions extends Component {
         this.pushData(counter);
       }
     } catch (error) {
-      this.setState({ isError: true, errorText: error.message });
+      this.setState({ isError: true });
     }
   }
 
@@ -104,6 +103,10 @@ class Questions extends Component {
       showButton: true,
       questionAnswered: true
     });
+  };
+
+  handleTimeout = () => {
+    this.setState({ showResults: true });
   };
 
   increaseCorrect = () => {
@@ -178,114 +181,50 @@ class Questions extends Component {
       wrong,
       showResults,
       isError,
-      errorText
+      isDisplayMessage,
+      message,
+      showButton,
+      isAnswerCorrect
     } = this.state;
     const total = this.props.location.state.amount;
     let jsx;
     if (isLoading && !isError) {
-      jsx = (
-        <div className={`col-xs-12 ${classes.loadingContainer}`} align="center">
-          <div className="loader">
-            <svg viewBox="0 0 80 80">
-              <circle id="test" cx="40" cy="40" r="32" />
-            </svg>
-          </div>
-          <div className="loader triangle">
-            <svg viewBox="0 0 86 80">
-              <polygon points="43 8 79 72 7 72" />
-            </svg>
-          </div>
-          <div className="loader">
-            <svg viewBox="0 0 80 80">
-              <rect x="8" y="8" width="64" height="64" />
-            </svg>
-          </div>
-        </div>
-      );
+      jsx = <Loading />;
     } else if (!showResults && !isError) {
       jsx = (
-        <>
-          <div
-            className={`col-xs-12 ${classes.colQuestionCounter}`}
-            align="center"
-          >
-            <span>
-              Question {counter} of {total}
-            </span>
-          </div>
-          <div className={`col-xs-12 ${classes.colQuestion}`} align="center">
-            <div className="row">
-              <div className={`col-xs-12 ${classes.colCurrentQuestion}`}>
-                <h4>{atob(currQuestion)}</h4>
-              </div>
-              <div className="col-sm-12">
-                <Answers
-                  answers={this.shuffleArray(currAnswers)}
-                  checkAnswer={this.checkAnswer}
-                />
-              </div>
-              {this.state.isDisplayMessage ? (
-                <div
-                  className={
-                    this.state.isAnswerCorrect
-                      ? classes.answerCorrect
-                      : classes.answerWrong
-                  }
-                >
-                  {this.state.message}
-                </div>
-              ) : null}
-              {this.state.showButton ? (
-                <div className="col-sm-12">
-                  <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={this.nextQuestion}
-                  >
-                    Next question
-                  </button>
-                </div>
-              ) : null}
-            </div>
-          </div>
-          <div className={classes.countdownFooter}>
-            <ReactCountdownClock
-              seconds={120}
-              color="#fff"
-              alpha={1.0}
-              size={75}
-              weight={5}
-              fontSize="auto"
-              font="Arial"
-              showMilliseconds={true}
-              paused={false}
-              onComplete={() => this.setState({ showResults: true })}
-            />
-          </div>
-        </>
+        <Questions
+          classes={classes}
+          counter={counter}
+          total={total}
+          currQuestion={currQuestion}
+          currAnswers={currAnswers}
+          isDisplayMessage={isDisplayMessage}
+          isAnswerCorrect={isAnswerCorrect}
+          message={message}
+          showButton={showButton}
+          shuffleArray={this.shuffleArray}
+          checkAnswer={this.checkAnswer}
+          nextQuestion={this.nextQuestion}
+          handleTimeout={this.handleTimeout}
+        />
       );
     } else if (isError) {
-      jsx = (
-        <>
-          <h4>Sorry, something went wrong</h4>
-          <h2>
-            <em> {errorText}</em>
-          </h2>
-        </>
-      );
+      jsx = <Error classes={classes} />;
     } else if (!isError && showResults) {
       jsx = <Results score={{ total, correct, wrong }} />;
     }
 
     return (
       <>
-        <Navbar title={`Questions`} backButton={true} />
-        <div className="container">
-          <div className="row">{jsx}</div>
+        <div className={classes.cntn}>
+          <div className={classes.itm}>
+            <Navbar title={`Questions`} backButton={true} />
+          </div>
+          {jsx}
         </div>
       </>
     );
   }
 }
 
-export default withStyles(styles)(Questions);
+export default withStyles(styles)(Quiz);

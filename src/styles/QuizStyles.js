@@ -1,12 +1,40 @@
 const styles = {
+  cntn: {
+    display: "flex" /* or inline-flex */,
+    flexDirection: "column",
+    alignContent: "space-between",
+    position: "absolute",
+    top: "0",
+    bottom: "0",
+    width: "100%"
+  },
+  itm: {
+    color: "black"
+  },
+  footer: {
+    marginTop: "auto"
+  },
+  error: {
+    padding: "5px 10px",
+    textAlign: "center"
+  },
+  itemQuestion: {
+    display: "flex",
+    flexDirection: "column",
+    flexGrow: "1",
+    overflow: "auto",
+    /* for Firefox */
+    minHeight: "10px"
+  },
   answerCorrect: {
     display: "inline-block",
     margin: "10px 0",
     padding: "10px",
     backgroundColor: "#00a759",
     borderRadius: "7px",
-    fontSize: "2rem",
-    color: "#fff"
+    fontSize: "1.2rem",
+    color: "#fff",
+    textAlign: "center"
   },
   answerWrong: {
     display: "inline-block",
@@ -14,44 +42,43 @@ const styles = {
     padding: "10px",
     backgroundColor: "#c4063c",
     borderRadius: "7px",
-    fontSize: "2rem",
-    color: "#fff"
+    fontSize: "1.2rem",
+    color: "#fff",
+    textAlign: "center"
+  },
+  nextBtn: {
+    maxWidth: "200px",
+    margin: "0 auto",
+    borderRadius: "7px"
   },
   loadingContainer: {
     marginTop: "50px"
   },
-  countdownFooter: {
-    position: "fixed",
-    bottom: "0px",
-    left: "0px",
-    right: "0px",
-    padding: "10px",
-    backgroundColor: "#284664"
-  },
   colCurrentQuestion: {
-    margin: "10px 0",
+    margin: "10px auto",
     padding: "25px",
     backgroundColor: "#fcb902",
     borderRadius: "7px",
-    fontSize: "2rem",
+    fontSize: "1.2rem",
     color: "rgb(54, 54, 54)",
-    cursor: "default"
+    cursor: "default",
+    textAlign: "center"
   },
   colQuestionCounter: {
-    marginTop: "20px",
-    padding: "25px",
-    fontSize: "4rem",
+    margin: "20px 0",
+    fontSize: "2rem",
     color: "#2f3640",
     cursor: "default"
   },
   colAnswer: {
-    marginTop: "5px",
-    marginBottom: "5px",
+    minWidth: "250px",
+    margin: "5px 0",
     padding: "5px",
     backgroundColor: "#546de5",
     borderRadius: "7px",
-    fontSize: "2rem",
+    fontSize: "1.2rem",
     color: "#fff",
+    textAlign: "center",
     transition: "box-shadow 0.2s ease-in-out",
     "&:hover": {
       cursor: "pointer",
